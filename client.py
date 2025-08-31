@@ -2,6 +2,13 @@ from pygame import *
 import socket
 import json
 from threading import Thread
+from menu import ConnectWindow
+
+win = ConnectWindow()
+win.mainloop()
+
+host = win.host 
+port = win.port 
 
 # ---ПУГАМЕ НАЛАШТУВАННЯ ---
 WIDTH, HEIGHT = 800, 600
@@ -14,7 +21,7 @@ def connect_to_server():
     while True:
         try:
             client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            client.connect(('127.0.0.1', 8080)) # ---- Підключення до сервера
+            client.connect((host, port)) # ---- Підключення до сервера
             buffer = ""
             game_state = {}
             my_id = int(client.recv(24).decode())
